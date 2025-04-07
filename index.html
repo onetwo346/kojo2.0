@@ -48,7 +48,7 @@
       margin: 60px auto;
       padding: 0 30px;
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY( aliqua50px);
       transition: all 0.8s ease-out;
     }
     .section.visible {
@@ -135,7 +135,7 @@
       transform: scale(1.05);
     }
 
-    /* Improved PDF Preview Styles */
+    /* PDF Preview Styles */
     .pdf-preview {
       display: none;
       position: fixed;
@@ -174,251 +174,155 @@
       color: #e6b800;
     }
 
-    /* Modern Photo Album Styles */
-    .gallery {
-      display: none; /* Hide the original grid gallery */
-    }
-    
-    /* 3D Carousel Styles */
-    .carousel-container {
+    /* 3D Slideshow Styles */
+    .slideshow-container {
       position: relative;
       width: 100%;
-      height: 500px;
+      max-width: 800px;
+      height: 400px;
+      margin: 0 auto 40px;
       perspective: 1000px;
-      margin: 40px auto;
       overflow: hidden;
+      user-select: none;
     }
-    
-    .carousel {
-      position: relative;
+    .slideshow {
+      position: absolute;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    .carousel-item {
+    .slide {
       position: absolute;
-      width: 300px;
-      height: 400px;
-      left: 50%;
+      width: 250px;
+      height: 350px;
       top: 50%;
-      transform-style: preserve-3d;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      backface-visibility: hidden;
-      transform-origin: center center;
     }
-    
-    .carousel-item img {
+    .slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
-      background: #222;
     }
-    
-    .carousel-item.loading img {
-      opacity: 0.5;
-      filter: blur(2px);
-    }
-    
-    .carousel-item.error img {
-      display: none;
-    }
-    
-    .carousel-item .loading-spinner {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(255, 204, 0, 0.3);
-      border-radius: 50%;
-      border-top-color: #ffcc00;
-      animation: spin 1s linear infinite;
-    }
-    
-    .carousel-item.loading .loading-spinner {
-      display: block;
-    }
-    
-    .carousel-item .error-message {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #ffcc00;
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-    }
-    
-    .carousel-item.error .error-message {
-      display: block;
-    }
-    
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    .carousel-item:hover img {
-      transform: scale(1.05);
-      box-shadow: 0 8px 30px rgba(255, 204, 0, 0.4);
-    }
-    
-    .carousel-caption {
-      position: absolute;
-      bottom: -30px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      color: #ffcc00;
-      font-size: 1.1em;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    
-    .carousel-item:hover .carousel-caption {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .carousel-nav {
-      position: absolute;
-      bottom: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 10;
-    }
-    
-    .carousel-nav button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #ffcc00;
-      border: none;
-      color: #111;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .carousel-nav button:hover {
-      background: #e6b800;
-      transform: scale(1.1);
-    }
-    
-    .carousel-nav button.active {
-      background: #e6b800;
-      transform: scale(1.1);
-    }
-    
-    .carousel-prev, .carousel-next {
+    .nav-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
       background: rgba(255, 204, 0, 0.8);
-      border: none;
-      border-radius: 50%;
       color: #111;
+      border: none;
+      padding: 15px;
       font-size: 1.5em;
       cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s ease, transform 0.2s ease;
       z-index: 10;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    
-    .carousel-prev {
-      left: 20px;
-    }
-    
-    .carousel-next {
-      right: 20px;
-    }
-    
-    .carousel-prev:hover, .carousel-next:hover {
-      background: #ffcc00;
+    .nav-btn:hover {
+      background: #e6b800;
       transform: translateY(-50%) scale(1.1);
     }
-    
-    .carousel-prev:disabled, .carousel-next:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .prev-btn {
+      left: 20px;
     }
-    
-    @media (max-width: 768px) {
-      .carousel-container {
-        height: 400px;
-      }
-      
-      .carousel-item {
-        width: 250px;
-        height: 350px;
-      }
-      
-      .carousel-prev, .carousel-next {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-      }
-      
-      .carousel-nav {
-        bottom: -50px;
-      }
-      
-      .carousel-nav button {
-        width: 30px;
-        height: 30px;
-        font-size: 1em;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .carousel-container {
-        height: 300px;
-      }
-      
-      .carousel-item {
-        width: 200px;
-        height: 280px;
-      }
-      
-      .carousel-prev, .carousel-next {
-        width: 35px;
-        height: 35px;
-        font-size: 1em;
-      }
-      
-      .carousel-nav {
-        bottom: -40px;
-      }
-      
-      .carousel-nav button {
-        width: 25px;
-        height: 25px;
-        font-size: 0.8em;
-      }
+    .next-btn {
+      right: 20px;
     }
 
+    /* Column Gallery Styles */
+    .gallery-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #222;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: filter 0.3s ease;
+    }
+    .gallery-item:hover img {
+      filter: brightness(80%);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal.visible {
+      opacity: 1;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 10px;
+      animation: zoomIn 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #ffcc00;
+      font-size: 2.5em;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .modal-close:hover {
+      color: #e6b800;
+      transform: scale(1.1);
+    }
+
+    /* Quotes Section */
     .quotes-section {
       text-align: center;
     }
@@ -428,6 +332,7 @@
       margin: 20px 0;
       font-style: italic;
       min-height: 50px;
+      transition: opacity 0.5s ease;
     }
     .quote-btn {
       padding: 10px 20px;
@@ -443,6 +348,8 @@
       background: #e6b800;
       transform: scale(1.05);
     }
+
+    /* Museum CTA */
     .museum-cta {
       text-align: center;
       padding: 40px 20px;
@@ -470,6 +377,8 @@
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
     }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 50px 20px;
@@ -488,6 +397,8 @@
       background: #ffcc00;
       transform: translateX(-50%);
     }
+
+    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -500,19 +411,19 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
       header h1 { font-size: 2.5em; }
       header p { font-size: 1.2em; }
       .section h2 { font-size: 1.8em; }
       .section p, .section ul { font-size: 1em; }
       .book { width: 100%; }
+      .slideshow-container { max-width: 600px; height: 350px; }
+      .slide { width: 200px; height: 300px; }
       .gallery-item img { height: 150px; }
-      .pdf-preview {
-        width: 95vw;
-        height: 80vh;
-        min-height: 400px;
-        padding: 15px;
-      }
+      .pdf-preview { width: 95vw; height: 80vh; min-height: 400px; padding: 15px; }
+      .modal-close { font-size: 2em; }
     }
     @media (max-width: 480px) {
       header h1 { font-size: 2em; }
@@ -520,93 +431,12 @@
       .section { padding: 0 15px; }
       .museum-btn { font-size: 0.9em; padding: 10px 25px; }
       .quote-display { font-size: 1.1em; }
-      .book { width: 100%; }
-      .pdf-preview {
-        width: 98vw;
-        height: 70vh;
-        min-height: 350px;
-        padding: 10px;
-      }
-      .pdf-preview-close {
-        top: 10px;
-        right: 10px;
-        font-size: 1.5em;
-      }
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .modal.show {
-      display: flex;
-      opacity: 1;
-    }
-    
-    .modal img {
-      max-width: 90%;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-    }
-    
-    .modal.show img {
-      transform: scale(1);
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: #ffcc00;
-      font-size: 2.5em;
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-    
-    .modal-close:hover {
-      background: rgba(255, 204, 0, 0.2);
-      transform: scale(1.1);
-    }
-    
-    .modal-caption {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #ffcc00;
-      font-size: 1.2em;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px;
-      border-radius: 5px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .modal.show .modal-caption {
-      opacity: 1;
+      .slideshow-container { max-width: 300px; height: 250px; }
+      .slide { width: 150px; height: 200px; }
+      .gallery-item img { height: 120px; }
+      .pdf-preview { width: 98vw; height: 70vh; min-height: 350px; padding: 10px; }
+      .pdf-preview-close { top: 10px; right: 10px; font-size: 1.5em; }
+      .modal-close { font-size: 1.5em; top: 15px; right: 15px; }
     }
   </style>
 </head>
@@ -648,7 +478,7 @@
 
   <div class="section">
     <h2>Legacy</h2>
-    <p>Prof. Kojo Fosu's tireless efforts elevated African art from marginalization to a celebrated field of study. His scholarship inspired generations of artists, historians, and educators, cementing his status as a cultural icon whose influence resonates in galleries, universities, and communities worldwide.</p>
+    <p>Prof. Kojo Fosu’s tireless efforts elevated African art from marginalization to a celebrated field of study. His scholarship inspired generations of artists, historians, and educators, cementing his status as a cultural icon whose influence resonates in galleries, universities, and communities worldwide.</p>
   </div>
 
   <div class="section">
@@ -705,14 +535,138 @@
 
   <div class="section">
     <h2>Photo Album - In Memory</h2>
-    <div class="carousel-container">
-      <div class="carousel">
-        <!-- Carousel items will be dynamically added here -->
+    <div class="slideshow-container">
+      <div class="slideshow" id="slideshow">
+        <div class="slide" data-index="0">
+          <img src="IMG_5136.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="1">
+          <img src="IMG_5137.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="2">
+          <img src="IMG_5138.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="3">
+          <img src="IMG_5139.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="4">
+          <img src="IMG_5140.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="5">
+          <img src="IMG_5141.jpeg" alt="Prof. Kojo Fosu with wife" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="6">
+          <img src="IMG_5142.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="7">
+          <img src="IMG_5144.jpeg" alt="Prof. Kojo Fosu at an event" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="8">
+          <img src="IMG_5145.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="9">
+          <img src="IMG_5146.jpeg" alt="Prof. Kojo Fosu at a cultural event" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="10">
+          <img src="IMG_5147.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="11">
+          <img src="IMG_5148.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="12">
+          <img src="IMG_5149.jpeg" alt="Prof. Kojo Fosu lecturing" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="13">
+          <img src="IMG_5150.jpeg" alt="Prof. Kojo Fosu with colleagues" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="14">
+          <img src="IMG_5151.jpeg" alt="Prof. Kojo Fosu at a seminar" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="15">
+          <img src="IMG_5152.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="16">
+          <img src="IMG_5153.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+        </div>
+        <div class="slide" data-index="17">
+          <img src="IMG_5154.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        </div>
       </div>
-      <button class="carousel-prev">❮</button>
-      <button class="carousel-next">❯</button>
-      <div class="carousel-nav">
-        <!-- Navigation dots will be dynamically added here -->
+      <button class="nav-btn prev-btn" onclick="moveSlide(-1)">❮</button>
+      <button class="nav-btn next-btn" onclick="moveSlide(1)">❯</button>
+    </div>
+    <div class="gallery-column">
+      <div class="gallery-item">
+        <img src="IMG_5136.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At an exhibition</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5137.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With dignitaries</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5138.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">In traditional attire</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5139.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With family</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5140.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">In traditional attire</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5141.jpeg" alt="Prof. Kojo Fosu with wife" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With wife</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5142.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At a graduation</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5144.jpeg" alt="Prof. Kojo Fosu at an event" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At an event</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5145.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With students</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5146.jpeg" alt="Prof. Kojo Fosu at a cultural event" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At a cultural event</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5147.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With family</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5148.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At a graduation</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5149.jpeg" alt="Prof. Kojo Fosu lecturing" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">Lecturing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5150.jpeg" alt="Prof. Kojo Fosu with colleagues" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With colleagues</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5151.jpeg" alt="Prof. Kojo Fosu at a seminar" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At a seminar</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5152.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With students</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5153.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">At an exhibition</div>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_5154.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        <div class="gallery-caption">With dignitaries</div>
       </div>
     </div>
   </div>
@@ -728,7 +682,6 @@
   <div class="modal" id="imageModal">
     <span class="modal-close" onclick="closeModal()">×</span>
     <img id="modalImage" src="" alt="Fullscreen Image">
-    <div class="modal-caption" id="modalCaption"></div>
   </div>
 
   <div class="pdf-preview" id="pdfPreview">
@@ -748,7 +701,7 @@
     }, { threshold: 0.2 });
     sections.forEach(section => observer.observe(section));
 
-    // PDF Preview (Scanning) Functionality
+    // PDF Preview Functionality
     function showPDF(event, pdfUrl) {
       event.preventDefault();
       const pdfPreview = document.getElementById('pdfPreview');
@@ -763,36 +716,69 @@
       document.getElementById('pdfIframe').src = '';
     }
 
-    // Photo Album Modal Functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    // 3D Slideshow Functionality
+    const slideshow = document.getElementById('slideshow');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    function updateSlides() {
+      const angleStep = 360 / totalSlides;
+      slides.forEach((slide, index) => {
+        const angle = (index - currentIndex) * angleStep;
+        const z = Math.cos((angle * Math.PI) / 180) * 200 - 200;
+        const x = Math.sin((angle * Math.PI) / 180) * 200;
+        slide.style.transform = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${z}px) translateX(${x}px)`;
+        slide.style.opacity = z > -150 ? 1 : 0.3;
+        slide.style.zIndex = Math.round(z + 200);
+      });
+    }
+
+    function moveSlide(direction) {
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      slideshow.style.transform = `rotateY(${-(currentIndex * (360 / totalSlides))}deg)`;
+      updateSlides();
+    }
+
+    // Initialize slideshow
+    updateSlides();
+
+    // Auto-rotate with pause on hover
+    let autoRotate = setInterval(() => moveSlide(1), 5000);
+    slideshow.addEventListener('mouseenter', () => clearInterval(autoRotate));
+    slideshow.addEventListener('mouseleave', () => {
+      autoRotate = setInterval(() => moveSlide(1), 5000);
+    });
+
+    // Modal Functionality for both slideshow and gallery
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
+    const clickableImages = document.querySelectorAll('.slide, .gallery-item');
 
-    galleryItems.forEach(item => {
-      item.addEventListener('click', () => {
+    clickableImages.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
         const img = item.querySelector('img');
-        if (!img.classList.contains('error')) { // Only open modal if image is not broken
-          showModal(img.src, img.alt);
+        if (!img.classList.contains('error')) {
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          modal.style.display = 'flex';
+          setTimeout(() => modal.classList.add('visible'), 10);
         }
       });
     });
 
-    function showModal(imgSrc, caption) {
-      modalImage.src = imgSrc;
-      modalImage.alt = caption;
-      modalCaption.textContent = caption;
-      modal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-
     function closeModal() {
-      modal.classList.remove('show');
-      document.body.style.overflow = '';
+      modal.classList.remove('visible');
+      setTimeout(() => modal.style.display = 'none', 300);
     }
 
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
 
     // Quotes Functionality
@@ -802,7 +788,7 @@
       "Art is the heartbeat of a culture, pulsing through time.",
       "Wisdom is the root, knowledge the branches – nurture both.",
       "A people without history are like a tree without roots.",
-      "Every stroke of the artist's hand tells a story of the soul.",
+      "Every stroke of the artist’s hand tells a story of the soul.",
       "To understand art is to listen to the whispers of ancestors.",
       "Growth comes to those who plant seeds in fertile minds.",
       "The beauty of Africa lies in its unyielding spirit.",
@@ -812,7 +798,7 @@
       "Art speaks where words fail.",
       "The wise man builds his house on the rock of culture.",
       "To create is to breathe life into the invisible.",
-      "A nation's wealth is measured in its stories, not its gold.",
+      "A nation’s wealth is measured in its stories, not its gold.",
       "The artist sees what the eyes of others overlook.",
       "Knowledge shared is a flame multiplied.",
       "In every carving lies a lesson, in every color a truth.",
@@ -824,7 +810,11 @@
 
     function shuffleQuotes() {
       const randomIndex = Math.floor(Math.random() * quotes.length);
-      quoteDisplay.textContent = quotes[randomIndex];
+      quoteDisplay.style.opacity = 0;
+      setTimeout(() => {
+        quoteDisplay.textContent = quotes[randomIndex];
+        quoteDisplay.style.opacity = 1;
+      }, 500);
     }
 
     quoteBtn.addEventListener('click', () => {
@@ -832,218 +822,15 @@
         clearInterval(intervalId);
         intervalId = null;
         quoteBtn.textContent = 'Begin Wise Sayings';
-        quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
+        quoteDisplay.style.opacity = 0;
+        setTimeout(() => {
+          quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
+          quoteDisplay.style.opacity = 1;
+        }, 500);
       } else {
         shuffleQuotes();
         intervalId = setInterval(shuffleQuotes, 10000);
         quoteBtn.textContent = 'Stop Wise Sayings';
-      }
-    });
-
-    // 3D Carousel Functionality
-    const photos = [
-      { src: 'IMG_5136.jpeg', caption: 'At an exhibition' },
-      { src: 'IMG_5137.jpeg', caption: 'With dignitaries' },
-      { src: 'IMG_5138.jpeg', caption: 'In traditional attire' },
-      { src: 'IMG_5139.jpeg', caption: 'With family' },
-      { src: 'IMG_5140.jpeg', caption: 'In traditional attire' },
-      { src: 'IMG_5141.jpeg', caption: 'With wife' },
-      { src: 'IMG_5142.jpeg', caption: 'At a graduation' },
-      { src: 'IMG_5144.jpeg', caption: 'At an event' },
-      { src: 'IMG_5145.jpeg', caption: 'With students' },
-      { src: 'IMG_5146.jpeg', caption: 'At a cultural event' },
-      { src: 'IMG_5147.jpeg', caption: 'With family' },
-      { src: 'IMG_5148.jpeg', caption: 'At a graduation' },
-      { src: 'IMG_5149.jpeg', caption: 'Lecturing' },
-      { src: 'IMG_5150.jpeg', caption: 'With colleagues' },
-      { src: 'IMG_5151.jpeg', caption: 'At a seminar' },
-      { src: 'IMG_5152.jpeg', caption: 'With students' },
-      { src: 'IMG_5153.jpeg', caption: 'At an exhibition' },
-      { src: 'IMG_5154.jpeg', caption: 'With dignitaries' }
-    ];
-
-    const carousel = document.querySelector('.carousel');
-    const carouselNav = document.querySelector('.carousel-nav');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
-    let currentIndex = 0;
-    let items = [];
-    let navDots = [];
-    let isAnimating = false;
-    let autoRotateInterval = null;
-
-    function createCarousel() {
-      photos.forEach((photo, index) => {
-        // Create carousel item
-        const item = document.createElement('div');
-        item.className = 'carousel-item loading';
-        item.innerHTML = `
-          <img src="${photo.src}" alt="${photo.caption}" onerror="handleImageError(this)">
-          <div class="loading-spinner"></div>
-          <div class="error-message">Image not available</div>
-          <div class="carousel-caption">${photo.caption}</div>
-        `;
-        carousel.appendChild(item);
-        items.push(item);
-
-        // Add click event for modal
-        const img = item.querySelector('img');
-        img.addEventListener('click', () => {
-          if (!item.classList.contains('error')) {
-            showModal(photo.src, photo.caption);
-          }
-        });
-
-        // Create navigation dot
-        const dot = document.createElement('button');
-        dot.className = 'carousel-dot';
-        dot.innerHTML = '●';
-        dot.addEventListener('click', () => goToSlide(index));
-        carouselNav.appendChild(dot);
-        navDots.push(dot);
-
-        // Load image
-        img.onload = () => {
-          item.classList.remove('loading');
-        };
-      });
-
-      updateCarousel();
-      startAutoRotation();
-    }
-
-    function handleImageError(img) {
-      const item = img.parentElement;
-      item.classList.remove('loading');
-      item.classList.add('error');
-    }
-
-    function updateCarousel() {
-      const angle = 360 / items.length;
-      const radius = Math.min(window.innerWidth, 1200) / 2;
-
-      items.forEach((item, index) => {
-        const rotation = angle * index;
-        const x = Math.sin(rotation * Math.PI / 180) * radius;
-        const z = Math.cos(rotation * Math.PI / 180) * radius;
-        
-        item.style.transform = `
-          translateX(${x}px)
-          translateZ(${z}px)
-          rotateY(${rotation}deg)
-        `;
-      });
-
-      navDots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-      });
-
-      // Update button states
-      prevBtn.disabled = isAnimating;
-      nextBtn.disabled = isAnimating;
-    }
-
-    function goToSlide(index) {
-      if (isAnimating) return;
-      
-      isAnimating = true;
-      currentIndex = index;
-      const rotation = -360 * (currentIndex / items.length);
-      carousel.style.transform = `rotateY(${rotation}deg)`;
-      
-      // Reset animation state after transition
-      setTimeout(() => {
-        isAnimating = false;
-      }, 1000);
-      
-      updateCarousel();
-    }
-
-    function nextSlide() {
-      if (isAnimating) return;
-      currentIndex = (currentIndex + 1) % items.length;
-      goToSlide(currentIndex);
-    }
-
-    function prevSlide() {
-      if (isAnimating) return;
-      currentIndex = (currentIndex - 1 + items.length) % items.length;
-      goToSlide(currentIndex);
-    }
-
-    function startAutoRotation() {
-      if (autoRotateInterval) clearInterval(autoRotateInterval);
-      autoRotateInterval = setInterval(nextSlide, 5000);
-    }
-
-    function stopAutoRotation() {
-      if (autoRotateInterval) {
-        clearInterval(autoRotateInterval);
-        autoRotateInterval = null;
-      }
-    }
-
-    // Initialize carousel
-    createCarousel();
-
-    // Add event listeners
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    });
-
-    // Add touch swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carousel.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      stopAutoRotation();
-    });
-
-    carousel.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-      startAutoRotation();
-    });
-
-    function handleSwipe() {
-      if (isAnimating) return;
-      
-      const swipeThreshold = 50;
-      if (touchEndX < touchStartX - swipeThreshold) {
-        nextSlide();
-      } else if (touchEndX > touchStartX + swipeThreshold) {
-        prevSlide();
-      }
-    }
-
-    // Pause auto-rotation on hover
-    carousel.addEventListener('mouseenter', stopAutoRotation);
-    carousel.addEventListener('mouseleave', startAutoRotation);
-
-    // Handle window resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        updateCarousel();
-      }, 250);
-    });
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      stopAutoRotation();
-    });
-
-    // Add keyboard support for modal
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('show')) {
-        closeModal();
       }
     });
   </script>
