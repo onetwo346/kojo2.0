@@ -48,7 +48,7 @@
       margin: 60px auto;
       padding: 0 30px;
       opacity: 0;
-      transform: translateY( aliqua50px);
+      transform: translateY(50px);
       transition: all 0.8s ease-out;
     }
     .section.visible {
@@ -135,7 +135,7 @@
       transform: scale(1.05);
     }
 
-    /* PDF Preview Styles */
+    /* Improved PDF Preview Styles */
     .pdf-preview {
       display: none;
       position: fixed;
@@ -174,99 +174,52 @@
       color: #e6b800;
     }
 
-    /* 3D Slideshow Styles */
+    /* Slideshow Styles */
     .slideshow-container {
       position: relative;
-      width: 100%;
-      max-width: 800px;
-      height: 400px;
-      margin: 0 auto 40px;
-      perspective: 1000px;
+      max-width: 1000px;
+      margin: 20px auto;
       overflow: hidden;
-      user-select: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
-    .slideshow {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
     }
     .slide {
-      position: absolute;
-      width: 250px;
-      height: 350px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-      cursor: pointer;
+      min-width: 100%;
+      position: relative;
     }
     .slide img {
       width: 100%;
-      height: 100%;
+      height: 500px;
       object-fit: cover;
       border-radius: 10px;
-    }
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 204, 0, 0.8);
-      color: #111;
-      border: none;
-      padding: 15px;
-      font-size: 1.5em;
       cursor: pointer;
-      border-radius: 50%;
-      transition: background 0.3s ease, transform 0.2s ease;
-      z-index: 10;
-    }
-    .nav-btn:hover {
-      background: #e6b800;
-      transform: translateY(-50%) scale(1.1);
-    }
-    .prev-btn {
-      left: 20px;
-    }
-    .next-btn {
-      right: 20px;
-    }
-
-    /* Column Gallery Styles */
-    .gallery-column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    .gallery-item {
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      background: #222;
-      transition: transform 0.3s ease;
-    }
-    .gallery-item:hover {
-      transform: scale(1.03);
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: filter 0.3s ease;
     }
-    .gallery-item:hover img {
+    .slide img:hover {
       filter: brightness(80%);
     }
-    .gallery-caption {
+    .slide img.error {
+      display: none;
+    }
+    .slide .image-error {
+      display: none;
+      width: 100%;
+      height: 500px;
+      background: #333;
+      color: #ffcc00;
+      text-align: center;
+      line-height: 500px;
+      font-size: 1.2em;
+      border-radius: 10px;
+    }
+    .slide img.error + .image-error {
+      display: block;
+    }
+    .slide-caption {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -274,13 +227,52 @@
       background: rgba(0, 0, 0, 0.7);
       color: #fff;
       text-align: center;
-      padding: 10px;
-      font-size: 0.9em;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    .gallery-item:hover .gallery-caption {
+      padding: 15px;
+      font-size: 1.1em;
       transform: translateY(0);
+      transition: background 0.3s ease;
+    }
+    .slide:hover .slide-caption {
+      background: rgba(0, 0, 0, 0.9);
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffcc00;
+      font-size: 2em;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .prev:hover, .next:hover {
+      background: rgba(255, 204, 0, 0.8);
+    }
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+    .dots {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #888;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .dot.active {
+      background: #ffcc00;
     }
 
     /* Modal Styles */
@@ -291,38 +283,26 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .modal.visible {
-      opacity: 1;
     }
     .modal img {
       max-width: 90%;
       max-height: 90vh;
       border-radius: 10px;
       animation: zoomIn 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     }
     .modal-close {
       position: absolute;
       top: 20px;
       right: 30px;
       color: #ffcc00;
-      font-size: 2.5em;
+      font-size: 2em;
       cursor: pointer;
-      transition: color 0.3s ease, transform 0.2s ease;
-    }
-    .modal-close:hover {
-      color: #e6b800;
-      transform: scale(1.1);
     }
 
-    /* Quotes Section */
     .quotes-section {
       text-align: center;
     }
@@ -332,7 +312,6 @@
       margin: 20px 0;
       font-style: italic;
       min-height: 50px;
-      transition: opacity 0.5s ease;
     }
     .quote-btn {
       padding: 10px 20px;
@@ -348,8 +327,6 @@
       background: #e6b800;
       transform: scale(1.05);
     }
-
-    /* Museum CTA */
     .museum-cta {
       text-align: center;
       padding: 40px 20px;
@@ -377,8 +354,6 @@
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
     }
-
-    /* Footer */
     footer {
       text-align: center;
       padding: 50px 20px;
@@ -397,8 +372,6 @@
       background: #ffcc00;
       transform: translateX(-50%);
     }
-
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -411,19 +384,20 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
       header h1 { font-size: 2.5em; }
       header p { font-size: 1.2em; }
       .section h2 { font-size: 1.8em; }
       .section p, .section ul { font-size: 1em; }
       .book { width: 100%; }
-      .slideshow-container { max-width: 600px; height: 350px; }
-      .slide { width: 200px; height: 300px; }
-      .gallery-item img { height: 150px; }
-      .pdf-preview { width: 95vw; height: 80vh; min-height: 400px; padding: 15px; }
-      .modal-close { font-size: 2em; }
+      .slide img { height: 300px; }
+      .slide .image-error { height: 300px; line-height: 300px; }
+      .pdf-preview {
+        width: 95vw;
+        height: 80vh;
+        min-height: 400px;
+        padding: 15px;
+      }
     }
     @media (max-width: 480px) {
       header h1 { font-size: 2em; }
@@ -431,12 +405,20 @@
       .section { padding: 0 15px; }
       .museum-btn { font-size: 0.9em; padding: 10px 25px; }
       .quote-display { font-size: 1.1em; }
-      .slideshow-container { max-width: 300px; height: 250px; }
-      .slide { width: 150px; height: 200px; }
-      .gallery-item img { height: 120px; }
-      .pdf-preview { width: 98vw; height: 70vh; min-height: 350px; padding: 10px; }
-      .pdf-preview-close { top: 10px; right: 10px; font-size: 1.5em; }
-      .modal-close { font-size: 1.5em; top: 15px; right: 15px; }
+      .book { width: 100%; }
+      .slide img { height: 200px; }
+      .slide .image-error { height: 200px; line-height: 200px; }
+      .pdf-preview {
+        width: 98vw;
+        height: 70vh;
+        min-height: 350px;
+        padding: 10px;
+      }
+      .pdf-preview-close {
+        top: 10px;
+        right: 10px;
+        font-size: 1.5em;
+      }
     }
   </style>
 </head>
@@ -536,138 +518,101 @@
   <div class="section">
     <h2>Photo Album - In Memory</h2>
     <div class="slideshow-container">
-      <div class="slideshow" id="slideshow">
-        <div class="slide" data-index="0">
-          <img src="IMG_5136.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+      <div class="slides" id="slides">
+        <div class="slide">
+          <img src="IMG_5136.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At an exhibition</div>
         </div>
-        <div class="slide" data-index="1">
-          <img src="IMG_5137.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5137.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With dignitaries</div>
         </div>
-        <div class="slide" data-index="2">
-          <img src="IMG_5138.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5138.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">In traditional attire</div>
         </div>
-        <div class="slide" data-index="3">
-          <img src="IMG_5139.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5139.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With family</div>
         </div>
-        <div class="slide" data-index="4">
-          <img src="IMG_5140.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5140.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">In traditional attire</div>
         </div>
-        <div class="slide" data-index="5">
-          <img src="IMG_5141.jpeg" alt="Prof. Kojo Fosu with wife" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5141.jpeg" alt="Prof. Kojo Fosu with wife" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With wife</div>
         </div>
-        <div class="slide" data-index="6">
-          <img src="IMG_5142.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5142.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At a graduation</div>
         </div>
-        <div class="slide" data-index="7">
-          <img src="IMG_5144.jpeg" alt="Prof. Kojo Fosu at an event" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5144.jpeg" alt="Prof. Kojo Fosu at an event" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At an event</div>
         </div>
-        <div class="slide" data-index="8">
-          <img src="IMG_5145.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5145.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With students</div>
         </div>
-        <div class="slide" data-index="9">
-          <img src="IMG_5146.jpeg" alt="Prof. Kojo Fosu at a cultural event" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5146.jpeg" alt="Prof. Kojo Fosu at a cultural event" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At a cultural event</div>
         </div>
-        <div class="slide" data-index="10">
-          <img src="IMG_5147.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5147.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With family</div>
         </div>
-        <div class="slide" data-index="11">
-          <img src="IMG_5148.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5148.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At a graduation</div>
         </div>
-        <div class="slide" data-index="12">
-          <img src="IMG_5149.jpeg" alt="Prof. Kojo Fosu lecturing" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5149.jpeg" alt="Prof. Kojo Fosu lecturing" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">Lecturing</div>
         </div>
-        <div class="slide" data-index="13">
-          <img src="IMG_5150.jpeg" alt="Prof. Kojo Fosu with colleagues" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5150.jpeg" alt="Prof. Kojo Fosu with colleagues" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With colleagues</div>
         </div>
-        <div class="slide" data-index="14">
-          <img src="IMG_5151.jpeg" alt="Prof. Kojo Fosu at a seminar" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5151.jpeg" alt="Prof. Kojo Fosu at a seminar" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At a seminar</div>
         </div>
-        <div class="slide" data-index="15">
-          <img src="IMG_5152.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5152.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With students</div>
         </div>
-        <div class="slide" data-index="16">
-          <img src="IMG_5153.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
+        <div class="slide img">
+          <img src="IMG_5153.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">At an exhibition</div>
         </div>
-        <div class="slide" data-index="17">
-          <img src="IMG_5154.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
+        <div class="slide">
+          <img src="IMG_5154.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')">
+          <div class="image-error">Image Not Found</div>
+          <div class="slide-caption">With dignitaries</div>
         </div>
       </div>
-      <button class="nav-btn prev-btn" onclick="moveSlide(-1)">❮</button>
-      <button class="nav-btn next-btn" onclick="moveSlide(1)">❯</button>
-    </div>
-    <div class="gallery-column">
-      <div class="gallery-item">
-        <img src="IMG_5136.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At an exhibition</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5137.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With dignitaries</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5138.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">In traditional attire</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5139.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With family</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5140.jpeg" alt="Prof. Kojo Fosu in traditional attire" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">In traditional attire</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5141.jpeg" alt="Prof. Kojo Fosu with wife" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With wife</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5142.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At a graduation</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5144.jpeg" alt="Prof. Kojo Fosu at an event" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At an event</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5145.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With students</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5146.jpeg" alt="Prof. Kojo Fosu at a cultural event" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At a cultural event</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5147.jpeg" alt="Prof. Kojo Fosu with family" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With family</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5148.jpeg" alt="Prof. Kojo Fosu at a graduation" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At a graduation</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5149.jpeg" alt="Prof. Kojo Fosu lecturing" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">Lecturing</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5150.jpeg" alt="Prof. Kojo Fosu with colleagues" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With colleagues</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5151.jpeg" alt="Prof. Kojo Fosu at a seminar" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At a seminar</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5152.jpeg" alt="Prof. Kojo Fosu with students" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With students</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5153.jpeg" alt="Prof. Kojo Fosu at an exhibition" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">At an exhibition</div>
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_5154.jpeg" alt="Prof. Kojo Fosu with dignitaries" onerror="this.classList.add('error')" />
-        <div class="gallery-caption">With dignitaries</div>
-      </div>
+      <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+      <span class="next" onclick="changeSlide(1)">&#10095;</span>
+      <div class="dots" id="dots"></div>
     </div>
   </div>
 
@@ -716,70 +661,77 @@
       document.getElementById('pdfIframe').src = '';
     }
 
-    // 3D Slideshow Functionality
-    const slideshow = document.getElementById('slideshow');
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    let currentIndex = 0;
+    // Slideshow Functionality
+    const slides = document.getElementById('slides');
+    const slideElements = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Create dots
+    slideElements.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
 
     function updateSlides() {
-      const angleStep = 360 / totalSlides;
-      slides.forEach((slide, index) => {
-        const angle = (index - currentIndex) * angleStep;
-        const z = Math.cos((angle * Math.PI) / 180) * 200 - 200;
-        const x = Math.sin((angle * Math.PI) / 180) * 200;
-        slide.style.transform = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${z}px) translateX(${x}px)`;
-        slide.style.opacity = z > -150 ? 1 : 0.3;
-        slide.style.zIndex = Math.round(z + 200);
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
       });
     }
 
-    function moveSlide(direction) {
-      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-      slideshow.style.transform = `rotateY(${-(currentIndex * (360 / totalSlides))}deg)`;
+    function changeSlide(n) {
+      currentSlide = (currentSlide + n + slideElements.length) % slideElements.length;
       updateSlides();
+      resetInterval();
     }
 
-    // Initialize slideshow
-    updateSlides();
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlides();
+      resetInterval();
+    }
 
-    // Auto-rotate with pause on hover
-    let autoRotate = setInterval(() => moveSlide(1), 5000);
-    slideshow.addEventListener('mouseenter', () => clearInterval(autoRotate));
-    slideshow.addEventListener('mouseleave', () => {
-      autoRotate = setInterval(() => moveSlide(1), 5000);
-    });
+    function autoSlide() {
+      changeSlide(1);
+    }
 
-    // Modal Functionality for both slideshow and gallery
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const clickableImages = document.querySelectorAll('.slide, .gallery-item');
+    function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(autoSlide, 5000);
+    }
 
-    clickableImages.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const img = item.querySelector('img');
+    // Modal for full-screen image
+    slideElements.forEach(slide => {
+      const img = slide.querySelector('img');
+      img.addEventListener('click', () => {
         if (!img.classList.contains('error')) {
           modalImage.src = img.src;
           modalImage.alt = img.alt;
           modal.style.display = 'flex';
-          setTimeout(() => modal.classList.add('visible'), 10);
+          clearInterval(slideInterval); // Pause slideshow when modal is open
         }
       });
     });
 
     function closeModal() {
-      modal.classList.remove('visible');
-      setTimeout(() => modal.style.display = 'none', 300);
+      modal.style.display = 'none';
+      resetInterval(); // Resume slideshow when modal is closed
     }
 
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
+    // Initialize slideshow
+    updateSlides();
+    slideInterval = setInterval(autoSlide, 5000);
 
     // Quotes Functionality
     const quotes = [
@@ -806,30 +758,22 @@
     ];
     const quoteDisplay = document.getElementById('quoteDisplay');
     const quoteBtn = document.getElementById('quoteBtn');
-    let intervalId = null;
+    let quoteInterval = null;
 
     function shuffleQuotes() {
       const randomIndex = Math.floor(Math.random() * quotes.length);
-      quoteDisplay.style.opacity = 0;
-      setTimeout(() => {
-        quoteDisplay.textContent = quotes[randomIndex];
-        quoteDisplay.style.opacity = 1;
-      }, 500);
+      quoteDisplay.textContent = quotes[randomIndex];
     }
 
     quoteBtn.addEventListener('click', () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
+      if (quoteInterval) {
+        clearInterval(quoteInterval);
+        quoteInterval = null;
         quoteBtn.textContent = 'Begin Wise Sayings';
-        quoteDisplay.style.opacity = 0;
-        setTimeout(() => {
-          quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
-          quoteDisplay.style.opacity = 1;
-        }, 500);
+        quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
       } else {
         shuffleQuotes();
-        intervalId = setInterval(shuffleQuotes, 10000);
+        quoteInterval = setInterval(shuffleQuotes, 10000);
         quoteBtn.textContent = 'Stop Wise Sayings';
       }
     });
