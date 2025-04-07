@@ -1,611 +1,551 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prof. Kojo Fosu - African Art Legacy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Montserrat', sans-serif; 
-      background: linear-gradient(135deg, #0b0b0b, #1a1a1a); 
-      color: #f0f0f0; 
-      line-height: 1.6; 
-      overflow-x: hidden; 
-    }
-    header { 
-      position: relative; 
-      min-height: 100vh; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-      background: linear-gradient(to bottom, rgba(17, 17, 17, 0.9), rgba(34, 34, 34, 0.8)), url('IMG_5117.jpeg') no-repeat center/cover; 
-      text-align: center; 
-      padding: 0 20px; 
-      animation: fadeIn 2s ease-in; 
-    }
-    header h1 { 
-      font-size: 4em; 
-      color: #ffcc00; 
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); 
-      animation: slideUp 1s ease-out; 
-    }
-    header p { 
-      font-size: 1.5em; 
-      margin-top: 15px; 
-      color: #ddd; 
-      max-width: 600px; 
-      animation: slideUp 1.5s ease-out; 
-    }
-    .section { 
-      max-width: 1100px; 
-      margin: 60px auto; 
-      padding: 0 30px; 
-      opacity: 0; 
-      transform: translateY(50px); 
-      transition: all 0.8s ease-out; 
-    }
-    .section.visible { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-    .section h2 { 
-      color: #ffcc00; 
-      font-size: 2.2em; 
-      border-bottom: 3px solid #ffcc00; 
-      padding-bottom: 10px; 
-      margin-bottom: 25px; 
-    }
-    .section p, .section ul { font-size: 1.1em; }
-    ul { list-style: none; padding-left: 0; }
-    ul li { 
-      position: relative; 
-      padding-left: 25px; 
-      margin-bottom: 15px; 
-    }
-    ul li:before { 
-      content: '▹'; 
-      color: #ffcc00; 
-      position: absolute; 
-      left: 0; 
-      top: 2px; 
-    }
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Prof. Kojo Fosu - African Art Legacy</title>
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+     * { margin: 0; padding: 0; box-sizing: border-box; }
+     body { 
+       font-family: 'Montserrat', sans-serif; 
+       background: linear-gradient(135deg, #0b0b0b, #1a1a1a); 
+       color: #f0f0f0; 
+       line-height: 1.6; 
+       overflow-x: hidden; 
+     }
+     header { 
+       position: relative; 
+       min-height: 100vh; 
+       display: flex; 
+       flex-direction: column; 
+       justify-content: center; 
+       align-items: center; 
+       background: linear-gradient(to bottom, rgba(17, 17, 17, 0.9), rgba(34, 34, 34, 0.8)), url('IMG_5117.jpeg') no-repeat center/cover; 
+       text-align: center; 
+       padding: 0 20px; 
+       animation: fadeIn 2s ease-in; 
+     }
+     header h1 { 
+       font-size: 4em; 
+       color: #ffcc00; 
+       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); 
+       animation: slideUp 1s ease-out; 
+     }
+     header p { 
+       font-size: 1.5em; 
+       margin-top: 15px; 
+       color: #ddd; 
+       max-width: 600px; 
+       animation: slideUp 1.5s ease-out; 
+     }
+     .section { 
+       max-width: 1100px; 
+       margin: 60px auto; 
+       padding: 0 30px; 
+       opacity: 0; 
+       transform: translateY(50px); 
+       transition: all 0.8s ease-out; 
+     }
+     .section.visible { 
+       opacity: 1; 
+       transform: translateY(0); 
+     }
+     .section h2 { 
+       color: #ffcc00; 
+       font-size: 2.2em; 
+       border-bottom: 3px solid #ffcc00; 
+       padding-bottom: 10px; 
+       margin-bottom: 25px; 
+     }
+     .section p, .section ul { font-size: 1.1em; }
+     ul { list-style: none; padding-left: 0; }
+     ul li { 
+       position: relative; 
+       padding-left: 25px; 
+       margin-bottom: 15px; 
+     }
+     ul li:before { 
+       content: '▹'; 
+       color: #ffcc00; 
+       position: absolute; 
+       left: 0; 
+       top: 2px; 
+     }
+ 
+     /* Bookshelf Styles */
+     .bookshelf { 
+       display: grid; 
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+       gap: 30px; 
+       margin-top: 20px; 
+     }
+     .book { 
+       background: #222; 
+       padding: 20px; 
+       border-radius: 10px; 
+       transition: all 0.3s ease; 
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+       cursor: pointer; 
+       position: relative; 
+       overflow: hidden; 
+     }
+     .book:hover { 
+       transform: translateY(-10px); 
+       box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4); 
+     }
+     .book img { 
+       width: 100%; 
+       height: 150px; 
+       object-fit: cover; 
+       border-radius: 5px; 
+       margin-bottom: 15px; 
+     }
+     .book h3 { 
+       color: #ffcc00; 
+       font-size: 1.2em; 
+       margin-bottom: 10px; 
+     }
+     .book p { 
+       font-size: 0.95em; 
+       color: #ddd; 
+     }
+     .book .pdf-btn { 
+       display: inline-block; 
+       padding: 8px 15px; 
+       margin-top: 10px; 
+       background: #ffcc00; 
+       color: #111; 
+       text-decoration: none; 
+       font-weight: 700; 
+       border-radius: 5px; 
+       transition: all 0.3s ease; 
+     }
+     .book .pdf-btn:hover { 
+       background: #e6b800; 
+       transform: scale(1.05); 
+     }
+     .pdf-preview { 
+       display: none; 
+       position: fixed; 
+       top: 50%; 
+       left: 50%; 
+       transform: translate(-50%, -50%); 
+       width: 80%; 
+       max-height: 80vh; 
+       background: #fff; 
+       border-radius: 10px; 
+       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+       z-index: 1000; 
+       overflow: auto; 
+     }
+     .pdf-preview iframe { 
+       width: 100%; 
+       height: 100%; 
+       border: none; 
+     }
+     .pdf-preview-close { 
+       position: absolute; 
+       top: 10px; 
+       right: 15px; 
+       color: #ffcc00; 
+       font-size: 2em; 
+       cursor: pointer; 
+     }
+ 
+     /* Modern Photo Album Styles */
+     .gallery { 
+       display: grid; 
+       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+       gap: 20px; 
+       margin-top: 20px; 
+     }
+     .gallery-item { 
+       position: relative; 
+       border-radius: 10px; 
+       overflow: hidden; 
+       cursor: pointer; 
+       transition: transform 0.3s ease; 
+     }
+     .gallery-item:hover { 
+       transform: scale(1.03); 
+     }
+     .gallery-item img { 
+       width: 100%; 
+       height: 200px; 
+       object-fit: cover; 
+       border-radius: 10px; 
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+       transition: filter 0.3s ease; 
+     }
+     .gallery-item:hover img { 
+       filter: brightness(80%); 
+     }
+     .gallery-caption { 
+       position: absolute; 
+       bottom: 0; 
+       left: 0; 
+       width: 100%; 
+       background: rgba(0, 0, 0, 0.7); 
+       color: #fff; 
+       text-align: center; 
+       padding: 10px; 
+       font-size: 0.9em; 
+       transform: translateY(100%); 
+       transition: transform 0.3s ease; 
+     }
+     .gallery-item:hover .gallery-caption { 
+       transform: translateY(0); 
+     }
+     .modal { 
+       display: none; 
+       position: fixed; 
+       top: 0; 
+       left: 0; 
+       width: 100%; 
+       height: 100%; 
+       background: rgba(0, 0, 0, 0.9); 
+       justify-content: center; 
+       align-items: center; 
+       z-index: 1000; 
+     }
+     .modal img { 
+       max-width: 90%; 
+       max-height: 90vh; 
+       border-radius: 10px; 
+       animation: zoomIn 0.3s ease; 
+     }
+     .modal-close { 
+       position: absolute; 
+       top: 20px; 
+       right: 30px; 
+       color: #ffcc00; 
+       font-size: 2em; 
+       cursor: pointer; 
+     }
+ 
+     .quotes-section { text-align: center; }
+     .quote-display { 
+       font-size: 1.3em; 
+       color: #ddd; 
+       margin: 20px 0; 
+       font-style: italic; 
+       min-height: 50px; 
+     }
+     .quote-btn { 
+       padding: 10px 20px; 
+       font-size: 1em; 
+       color: #111; 
+       background: #ffcc00; 
+       border: none; 
+       border-radius: 5px; 
+       cursor: pointer; 
+       transition: all 0.3s ease; 
+     }
+     .quote-btn:hover { 
+       background: #e6b800; 
+       transform: scale(1.05); 
+     }
+     .museum-cta { 
+       text-align: center; 
+       padding: 40px 20px; 
+       background: #222; 
+       border-top: 1px solid #ffcc00; 
+       border-bottom: 1px solid #ffcc00; 
+     }
+     .museum-btn { 
+       display: inline-block; 
+       padding: 15px 40px; 
+       font-size: 1.2em; 
+       font-weight: 700; 
+       color: #111; 
+       background: #ffcc00; 
+       border: none; 
+       border-radius: 5px; 
+       text-decoration: none; 
+       text-transform: uppercase; 
+       transition: all 0.3s ease; 
+       cursor: pointer; 
+       box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3); 
+     }
+     .museum-btn:hover { 
+       background: #e6b800; 
+       transform: scale(1.05); 
+       box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5); 
+     }
+     footer { 
+       text-align: center; 
+       padding: 50px 20px; 
+       background: #111; 
+       color: #888; 
+       font-size: 1em; 
+       position: relative; 
+     }
+     footer:before { 
+       content: ''; 
+       position: absolute; 
+       top: 0; 
+       left: 50%; 
+       width: 100px; 
+       height: 2px; 
+       background: #ffcc00; 
+       transform: translateX(-50%); 
+     }
+     @keyframes fadeIn { 
+       from { opacity: 0; } 
+       to { opacity: 1; } 
+     }
+     @keyframes slideUp { 
+       from { transform: translateY(50px); opacity: 0; } 
+       to { transform: translateY(0); opacity: 1; } 
+     }
+     @keyframes zoomIn { 
+       from { transform: scale(0.8); opacity: 0; } 
+       to { transform: scale(1); opacity: 1; } 
+     }
+     @media (max-width: 768px) { 
+       header h1 { font-size: 2.5em; } 
+       header p { font-size: 1.2em; } 
+       .section h2 { font-size: 1.8em; } 
+       .section p, .section ul { font-size: 1em; } 
+       .book { width: 100%; } 
+       .gallery-item img { height: 150px; } 
+     }
+     @media (max-width: 480px) { 
+       header h1 { font-size: 2em; } 
+       header p { font-size: 1em; } 
+       .section { padding: 0 15px; } 
+       .museum-btn { font-size: 0.9em; padding: 10px 25px; } 
+       .quote-display { font-size: 1.1em; } 
+       .book { width: 100%; } 
+     }
+   </style>
+ </head>
+ <body>
+   <header>
+     <h1>Prof. Kojo Fosu</h1>
+     <p>Pioneer of African Art Studies | Historian | Educator | Cultural Visionary</p>
+   </header>
+ 
+   <div class="section">
+     <h2>Biography</h2>
+     <p>Prof. Kojo Fosu was a trailblazing Ghanaian art historian whose groundbreaking work redefined the global perception of African art. With decades of research, teaching, and cultural leadership, he bridged traditional and modern African aesthetics, leaving an indelible mark on the academic and artistic world.</p>
+   </div>
+ 
+   <div class="section">
+     <h2>Published Works</h2>
+     <ul>
+       <li><strong>Books:</strong> Authored 4 seminal works, including <em>20th Century Art of Africa</em> (1986, revised 1993) and <em>Traditional Art of Ghana</em> (1994)</li>
+       <li><strong>Journals:</strong> Published 12 peer-reviewed articles exploring African cultural expression</li>
+       <li><strong>Catalogues:</strong> Created 30 exhibition catalogues preserving African visual heritage</li>
+     </ul>
+   </div>
+ 
+   <div class="section">
+     <h2>Seminars & Lectures</h2>
+     <ul>
+       <li>Presented 12 scholarly papers at international seminars across the USA, Europe, and Africa</li>
+       <li>Delivered 20 captivating lectures at prestigious global institutions</li>
+     </ul>
+   </div>
+ 
+   <div class="section">
+     <h2>Curatorial Work</h2>
+     <ul>
+       <li>Curated 15 transformative art exhibitions in the USA, Ghana, and Nigeria</li>
+       <li>Produced and hosted 5 acclaimed TV series on African Arts & Culture (Channel 9, Washington DC, 1974–1976)</li>
+     </ul>
+   </div>
+ 
+   <div class="section">
+     <h2>Legacy</h2>
+     <p>Prof. Kojo Fosu’s tireless efforts elevated African art from marginalization to a celebrated field of study. His scholarship inspired generations of artists, historians, and educators, cementing his status as a cultural icon whose influence resonates in galleries, universities, and communities worldwide.</p>
+   </div>
+ 
+   <div class="section">
+     <h2>Innovative Initiatives</h2>
+     <ul>
+       <li><strong>Nsaba Computer Center (Early 2000s):</strong> Opened a computer center with internet access in Nsaba, Ghana, pioneering digital access in the community.</li>
+       <li><strong>Science Foundation for Girl Child Education:</strong> Established a foundation to promote STEM education for girls, empowering future leaders.</li>
+     </ul>
+   </div>
+ 
+   <div class="section">
+     <h2>Bookshelf</h2>
+     <div class="bookshelf">
+       <div class="book" data-pdf="https://example.com/pdfs/20th-century-art-of-africa.pdf">
+         <img src="IMG_5122.jpeg" alt="20th Century Art of Africa Cover">
+         <h3>20th Century Art of Africa</h3>
+         <p>1986, revised 1993 - A seminal work on African art in the modern era.</p>
+         <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/20th-century-art-of-africa.pdf')">Scan PDF</a>
+       </div>
+       <div class="book" data-pdf="https://example.com/pdfs/traditional-art-of-ghana.pdf">
+         <img src="book2_cover.jpg" alt="Traditional Art of Ghana Cover">
+         <h3>Traditional Art of Ghana</h3>
+         <p>1994 - A comprehensive study of Ghanaian artistic traditions.</p>
+         <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/traditional-art-of-ghana.pdf')">Scan PDF</a>
+       </div>
+       <div class="book" data-pdf="https://example.com/pdfs/journals.pdf">
+         <img src="journals_cover.jpg" alt="Journals Cover">
+         <h3>Journals</h3>
+         <p>12 peer-reviewed articles exploring African cultural expression.</p>
+         <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/journals.pdf')">Scan PDF</a>
+       </div>
+       <div class="book" data-pdf="https://example.com/pdfs/catalogues.pdf">
+         <img src="catalogues_cover.jpg" alt="Catalogues Cover">
+         <h3>Catalogues</h3>
+         <p>30 exhibition catalogues preserving African visual heritage.</p>
+         <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/catalogues.pdf')">Scan PDF</a>
+       </div>
 
-    /* Bookshelf Styles */
-    .bookshelf { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-      gap: 30px; 
-      margin-top: 20px; 
-    }
-    .book { 
-      background: #222; 
-      padding: 20px; 
-      border-radius: 10px; 
-      transition: all 0.3s ease; 
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-      cursor: pointer; 
-      position: relative; 
-      overflow: hidden; 
-    }
-    .book:hover { 
-      transform: translateY(-10px); 
-      box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4); 
-    }
-    .book img { 
-      width: 100%; 
-      height: 150px; 
-      object-fit: cover; 
-      border-radius: 5px; 
-      margin-bottom: 15px; 
-    }
-    .book h3 { 
-      color: #ffcc00; 
-      font-size: 1.2em; 
-      margin-bottom: 10px; 
-    }
-    .book p { 
-      font-size: 0.95em; 
-      color: #ddd; 
-    }
-    .book .pdf-btn { 
-      display: inline-block; 
-      padding: 8px 15px; 
-      margin-top: 10px; 
-      background: #ffcc00; 
-      color: #111; 
-      text-decoration: none; 
-      font-weight: 700; 
-      border-radius: 5px; 
-      transition: all 0.3s ease; 
-    }
-    .book .pdf-btn:hover { 
-      background: #e6b800; 
-      transform: scale(1.05); 
-    }
+<div class="book" data-pdf="https://example.com/pdfs/FW77855.pdf">
+         <img src="IMG_5123.jpeg" alt="Books">
+         <h3>Books</h3>
+         <p>Children's Songs for Games from Africa.</p>
+         <a href="#" class="pdf-btn" onclick="showPDF(event, 'FW77855.pdf')">Scan PDF</a>
+       </div>
 
-    /* Improved PDF Preview Modal */
-    .pdf-preview { 
-      display: none; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      background: rgba(0, 0, 0, 0.9); 
-      z-index: 1000; 
-      justify-content: center; 
-      align-items: center; 
-      padding: 20px; 
-    }
-    .pdf-container { 
-      position: relative; 
-      width: 90%; 
-      height: 90vh; 
-      background: #fff; 
-      border-radius: 10px; 
-      overflow: hidden; 
-    }
-    .pdf-container iframe { 
-      width: 100%; 
-      height: 100%; 
-      border: none; 
-    }
-    .pdf-controls { 
-      position: absolute; 
-      top: 10px; 
-      left: 10px; 
-      display: flex; 
-      gap: 10px; 
-    }
-    .pdf-controls button { 
-      padding: 5px 10px; 
-      background: #ffcc00; 
-      color: #111; 
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      font-size: 0.9em; 
-      transition: background 0.3s ease; 
-    }
-    .pdf-controls button:hover { 
-      background: #e6b800; 
-    }
-    .pdf-preview-close { 
-      position: absolute; 
-      top: 10px; 
-      right: 15px; 
-      color: #ffcc00; 
-      font-size: 2em; 
-      cursor: pointer; 
-    }
-
-    /* Modern Photo Album Styles */
-    .gallery { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-      gap: 20px; 
-      margin-top: 20px; 
-    }
-    .gallery-item { 
-      position: relative; 
-      border-radius: 10px; 
-      overflow: hidden; 
-      cursor: pointer; 
-      transition: transform 0.3s ease; 
-    }
-    .gallery-item:hover { 
-      transform: scale(1.03); 
-    }
-    .gallery-item img { 
-      width: 100%; 
-      height: 200px; 
-      object-fit: cover; 
-      border-radius: 10px; 
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-      transition: filter 0.3s ease; 
-    }
-    .gallery-item:hover img { 
-      filter: brightness(80%); 
-    }
-    .gallery-caption { 
-      position: absolute; 
-      bottom: 0; 
-      left: 0; 
-      width: 100%; 
-      background: rgba(0, 0, 0, 0.7); 
-      color: #fff; 
-      text-align: center; 
-      padding: 10px; 
-      font-size: 0.9em; 
-      transform: translateY(100%); 
-      transition: transform 0.3s ease; 
-    }
-    .gallery-item:hover .gallery-caption { 
-      transform: translateY(0); 
-    }
-    .modal { 
-      display: none; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      background: rgba(0, 0, 0, 0.9); 
-      justify-content: center; 
-      align-items: center; 
-      z-index: 1000; 
-    }
-    .modal img { 
-      max-width: 90%; 
-      max-height: 90vh; 
-      border-radius: 10px; 
-      animation: zoomIn 0.3s ease; 
-    }
-    .modal-close { 
-      position: absolute; 
-      top: 20px; 
-      right: 30px; 
-      color: #ffcc00; 
-      font-size: 2em; 
-      cursor: pointer; 
-    }
-
-    .quotes-section { text-align: center; }
-    .quote-display { 
-      font-size: 1.3em; 
-      color: #ddd; 
-      margin: 20px 0; 
-      font-style: italic; 
-      min-height: 50px; 
-    }
-    .quote-btn { 
-      padding: 10px 20px; 
-      font-size: 1em; 
-      color: #111; 
-      background: #ffcc00; 
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      transition: all 0.3s ease; 
-    }
-    .quote-btn:hover { 
-      background: #e6b800; 
-      transform: scale(1.05); 
-    }
-    .museum-cta { 
-      text-align: center; 
-      padding: 40px 20px; 
-      background: #222; 
-      border-top: 1px solid #ffcc00; 
-      border-bottom: 1px solid #ffcc00; 
-    }
-    .museum-btn { 
-      display: inline-block; 
-      padding: 15px 40px; 
-      font-size: 1.2em; 
-      font-weight: 700; 
-      color: #111; 
-      background: #ffcc00; 
-      border: none; 
-      border-radius: 5px; 
-      text-decoration: none; 
-      text-transform: uppercase; 
-      transition: all 0.3s ease; 
-      cursor: pointer; 
-      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3); 
-    }
-    .museum-btn:hover { 
-      background: #e6b800; 
-      transform: scale(1.05); 
-      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5); 
-    }
-    footer { 
-      text-align: center; 
-      padding: 50px 20px; 
-      background: #111; 
-      color: #888; 
-      font-size: 1em; 
-      position: relative; 
-    }
-    footer:before { 
-      content: ''; 
-      position: absolute; 
-      top: 0; 
-      left: 50%; 
-      width: 100px; 
-      height: 2px; 
-      background: #ffcc00; 
-      transform: translateX(-50%); 
-    }
-    @keyframes fadeIn { 
-      from { opacity: 0; } 
-      to { opacity: 1; } 
-    }
-    @keyframes slideUp { 
-      from { transform: translateY(50px); opacity: 0; } 
-      to { transform: translateY(0); opacity: 1; } 
-    }
-    @keyframes zoomIn { 
-      from { transform: scale(0.8); opacity: 0; } 
-      to { transform: scale(1); opacity: 1; } 
-    }
-    @media (max-width: 768px) { 
-      header h1 { font-size: 2.5em; } 
-      header p { font-size: 1.2em; } 
-      .section h2 { font-size: 1.8em; } 
-      .section p, .section ul { font-size: 1em; } 
-      .book { width: 100%; } 
-      .gallery-item img { height: 150px; } 
-      .pdf-container { 
-        width: 95%; 
-        height: 85vh; 
-      }
-    }
-    @media (max-width: 480px) { 
-      header h1 { font-size: 2em; } 
-      header p { font-size: 1em; } 
-      .section { padding: 0 15px; } 
-      .museum-btn { font-size: 0.9em; padding: 10px 25px; } 
-      .quote-display { font-size: 1.1em; } 
-      .book { width: 100%; } 
-      .pdf-container { 
-        width: 100%; 
-        height: 80vh; 
-      }
-      .pdf-controls button { 
-        font-size: 0.8em; 
-        padding: 4px 8px; 
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Prof. Kojo Fosu</h1>
-    <p>Pioneer of African Art Studies | Historian | Educator | Cultural Visionary</p>
-  </header>
-
-  <div class="section">
-    <h2>Biography</h2>
-    <p>Prof. Kojo Fosu was a trailblazing Ghanaian art historian whose groundbreaking work redefined the global perception of African art. With decades of research, teaching, and cultural leadership, he bridged traditional and modern African aesthetics, leaving an indelible mark on the academic and artistic world.</p>
-  </div>
-
-  <div class="section">
-    <h2>Published Works</h2>
-    <ul>
-      <li><strong>Books:</strong> Authored 4 seminal works, including <em>20th Century Art of Africa</em> (1986, revised 1993) and <em>Traditional Art of Ghana</em> (1994)</li>
-      <li><strong>Journals:</strong> Published 12 peer-reviewed articles exploring African cultural expression</li>
-      <li><strong>Catalogues:</strong> Created 30 exhibition catalogues preserving African visual heritage</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Seminars & Lectures</h2>
-    <ul>
-      <li>Presented 12 scholarly papers at international seminars across the USA, Europe, and Africa</li>
-      <li>Delivered 20 captivating lectures at prestigious global institutions</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Curatorial Work</h2>
-    <ul>
-      <li>Curated 15 transformative art exhibitions in the USA, Ghana, and Nigeria</li>
-      <li>Produced and hosted 5 acclaimed TV series on African Arts & Culture (Channel 9, Washington DC, 1974–1976)</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Legacy</h2>
-    <p>Prof. Kojo Fosu’s tireless efforts elevated African art from marginalization to a celebrated field of study. His scholarship inspired generations of artists, historians, and educators, cementing his status as a cultural icon whose influence resonates in galleries, universities, and communities worldwide.</p>
-  </div>
-
-  <div class="section">
-    <h2>Innovative Initiatives</h2>
-    <ul>
-      <li><strong>Nsaba Computer Center (Early 2000s):</strong> Opened a computer center with internet access in Nsaba, Ghana, pioneering digital access in the community.</li>
-      <li><strong>Science Foundation for Girl Child Education:</strong> Established a foundation to promote STEM education for girls, empowering future leaders.</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Bookshelf</h2>
-    <div class="bookshelf">
-      <div class="book" data-pdf="https://example.com/pdfs/20th-century-art-of-africa.pdf">
-        <img src="book1_cover.jpg" alt="20th Century Art of Africa Cover">
-        <h3>20th Century Art of Africa</h3>
-        <p>1986, revised 1993 - A seminal work on African art in the modern era.</p>
-        <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/20th-century-art-of-africa.pdf')">Scan PDF</a>
-      </div>
-      <div class="book" data-pdf="https://example.com/pdfs/traditional-art-of-ghana.pdf">
-        <img src="book2_cover.jpg" alt="Traditional Art of Ghana Cover">
-        <h3>Traditional Art of Ghana</h3>
-        <p>1994 - A comprehensive study of Ghanaian artistic traditions.</p>
-        <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/traditional-art-of-ghana.pdf')">Scan PDF</a>
-      </div>
-      <div class="book" data-pdf="https://example.com/pdfs/journals.pdf">
-        <img src="journals_cover.jpg" alt="Journals Cover">
-        <h3>Journals</h3>
-        <p>12 peer-reviewed articles exploring African cultural expression.</p>
-        <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/journals.pdf')">Scan PDF</a>
-      </div>
-      <div class="book" data-pdf="https://example.com/pdfs/catalogues.pdf">
-        <img src="catalogues_cover.jpg" alt="Catalogues Cover">
-        <h3>Catalogues</h3>
-        <p>30 exhibition catalogues preserving African visual heritage.</p>
-        <a href="#" class="pdf-btn" onclick="showPDF(event, 'https://example.com/pdfs/catalogues.pdf')">Scan PDF</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Prof. Kojo Fosu Quotes</h2>
-    <div class="quotes-section">
-      <div class="quote-display" id="quoteDisplay">"Click 'Begin Wise Sayings' to start."</div>
-      <button class="quote-btn" id="quoteBtn">Begin Wise Sayings</button>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Photo Album - In Memory</h2>
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="prof_photo1.jpg" alt="Prof. Kojo Fosu at an exhibition">
-        <div class="gallery-caption">At an exhibition</div>
-      </div>
-      <div class="gallery-item">
-        <img src="prof_photo2.jpg" alt="Prof. Kojo Fosu lecturing">
-        <div class="gallery-caption">Lecturing</div>
-      </div>
-      <div class="gallery-item">
-        <img src="prof_photo3.jpg" alt="Prof. Kojo Fosu with students">
-        <div class="gallery-caption">With students</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="museum-cta">
-    <a href="https://onetwo346.github.io" class="museum-btn">Enter Afrisu Art Museum</a>
-  </div>
-
-  <footer>
-    Crafted with pride by Kofi Fosu (Cosmos Coderr) | Honoring a Legendary Legacy
-  </footer>
-
-  <div class="modal" id="imageModal">
-    <span class="modal-close" onclick="closeModal()">×</span>
-    <img id="modalImage" src="" alt="Fullscreen Image">
-  </div>
-
-  <div class="pdf-preview" id="pdfPreview">
-    <div class="pdf-container">
-      <div class="pdf-controls">
-        <button onclick="zoomIn()">Zoom In</button>
-        <button onclick="zoomOut()">Zoom Out</button>
-        <button onclick="resetZoom()">Reset</button>
-      </div>
-      <span class="pdf-preview-close" onclick="closePDF()">×</span>
-      <iframe id="pdfIframe" src=""></iframe>
-    </div>
-  </div>
-
-  <script>
-    // Scroll animation for sections
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
-
-    // PDF Preview Functionality with Zoom
-    let zoomLevel = 1;
-    function showPDF(event, pdfUrl) {
-      event.preventDefault();
-      const pdfPreview = document.getElementById('pdfPreview');
-      const pdfIframe = document.getElementById('pdfIframe');
-      pdfIframe.src = pdfUrl;
-      pdfPreview.style.display = 'flex';
-      zoomLevel = 1; // Reset zoom on open
-      pdfIframe.style.transform = `scale(${zoomLevel})`;
-    }
-
-    function closePDF() {
-      const pdfPreview = document.getElementById('pdfPreview');
-      pdfPreview.style.display = 'none';
-      document.getElementById('pdfIframe').src = '';
-    }
-
-    function zoomIn() {
-      zoomLevel += 0.2;
-      const pdfIframe = document.getElementById('pdfIframe');
-      pdfIframe.style.transform = `scale(${zoomLevel})`;
-    }
-
-    function zoomOut() {
-      zoomLevel = Math.max(0.5, zoomLevel - 0.2);
-      const pdfIframe = document.getElementById('pdfIframe');
-      pdfIframe.style.transform = `scale(${zoomLevel})`;
-    }
-
-    function resetZoom() {
-      zoomLevel = 1;
-      const pdfIframe = document.getElementById('pdfIframe');
-      pdfIframe.style.transform = `scale(${zoomLevel})`;
-    }
-
-    // Photo Album Modal Functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-
-    galleryItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        modalImage.src = img.src;
-        modalImage.alt = img.alt;
-        modal.style.display = 'flex';
-      });
-    });
-
-    function closeModal() {
-      modal.style.display = 'none';
-    }
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    // Quotes Functionality
-    const quotes = [
-      "Wo tsi yɛ cocoa dua – Your brain is a cocoa tree that grows as long as you feed it with what it needs.",
-      "The past is a canvas; paint it with lessons for the future.",
-      "Art is the heartbeat of a culture, pulsing through time.",
-      "Wisdom is the root, knowledge the branches – nurture both.",
-      "A people without history are like a tree without roots.",
-      "Every stroke of the artist’s hand tells a story of the soul.",
-      "To understand art is to listen to the whispers of ancestors.",
-      "Growth comes to those who plant seeds in fertile minds.",
-      "The beauty of Africa lies in its unyielding spirit.",
-      "Education is the key that unlocks the treasure of heritage.",
-      "A mind open to learning is a sky open to stars.",
-      "Tradition is not a chain, but a bridge to tomorrow.",
-      "Art speaks where words fail.",
-      "The wise man builds his house on the rock of culture.",
-      "To create is to breathe life into the invisible.",
-      "A nation’s wealth is measured in its stories, not its gold.",
-      "The artist sees what the eyes of others overlook.",
-      "Knowledge shared is a flame multiplied.",
-      "In every carving lies a lesson, in every color a truth.",
-      "The future belongs to those who honor the past."
-    ];
-    const quoteDisplay = document.getElementById('quoteDisplay');
-    const quoteBtn = document.getElementById('quoteBtn');
-    let intervalId = null;
-
-    function shuffleQuotes() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      quoteDisplay.textContent = quotes[randomIndex];
-    }
-
-    quoteBtn.addEventListener('click', () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-        quoteBtn.textContent = 'Begin Wise Sayings';
-        quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
-      } else {
-        shuffleQuotes();
-        intervalId = setInterval(shuffleQuotes, 10000);
-        quoteBtn.textContent = 'Stop Wise Sayings';
-      }
-    });
-  </script>
-</body>
-</html>
+      
+     </div>
+   </div>
+ 
+   <div class="section">
+     <h2>Prof. Kojo Fosu Quotes</h2>
+     <div class="quotes-section">
+       <div class="quote-display" id="quoteDisplay">"Click 'Begin Wise Sayings' to start."</div>
+       <button class="quote-btn" id="quoteBtn">Begin Wise Sayings</button>
+     </div>
+   </div>
+ 
+   <div class="section">
+     <h2>Photo Album - In Memory</h2>
+     <div class="gallery">
+       <div class="gallery-item">
+         <img src="prof_photo1.jpg" alt="Prof. Kojo Fosu at an exhibition">
+         <div class="gallery-caption">At an exhibition</div>
+       </div>
+       <div class="gallery-item">
+         <img src="prof_photo2.jpg" alt="Prof. Kojo Fosu lecturing">
+         <div class="gallery-caption">Lecturing</div>
+       </div>
+       <div class="gallery-item">
+         <img src="prof_photo3.jpg" alt="Prof. Kojo Fosu with students">
+         <div class="gallery-caption">With students</div>
+       </div>
+     </div>
+   </div>
+ 
+   <div class="museum-cta">
+     <a href="https://onetwo346.github.io" class="museum-btn">Enter Afrisu Art Museum</a>
+   </div>
+ 
+   <footer>
+     Crafted with pride by Kofi Fosu (Cosmos Coderr) | Honoring a Legendary Legacy
+   </footer>
+ 
+   <div class="modal" id="imageModal">
+     <span class="modal-close" onclick="closeModal()">×</span>
+     <img id="modalImage" src="" alt="Fullscreen Image">
+   </div>
+ 
+   <div class="pdf-preview" id="pdfPreview">
+     <span class="pdf-preview-close" onclick="closePDF()">×</span>
+     <iframe id="pdfIframe" src=""></iframe>
+   </div>
+ 
+   <script>
+     // Scroll animation for sections
+     const sections = document.querySelectorAll('.section');
+     const observer = new IntersectionObserver((entries) => {
+       entries.forEach(entry => {
+         if (entry.isIntersecting) {
+           entry.target.classList.add('visible');
+         }
+       });
+     }, { threshold: 0.2 });
+     sections.forEach(section => observer.observe(section));
+ 
+     // PDF Preview (Scanning) Functionality
+     function showPDF(event, pdfUrl) {
+       event.preventDefault();
+       const pdfPreview = document.getElementById('pdfPreview');
+       const pdfIframe = document.getElementById('pdfIframe');
+       pdfIframe.src = pdfUrl;
+       pdfPreview.style.display = 'block';
+     }
+ 
+     function closePDF() {
+       const pdfPreview = document.getElementById('pdfPreview');
+       pdfPreview.style.display = 'none';
+       document.getElementById('pdfIframe').src = '';
+     }
+ 
+     // Photo Album Modal Functionality
+     const galleryItems = document.querySelectorAll('.gallery-item');
+     const modal = document.getElementById('imageModal');
+     const modalImage = document.getElementById('modalImage');
+ 
+     galleryItems.forEach(item => {
+       item.addEventListener('click', () => {
+         const img = item.querySelector('img');
+         modalImage.src = img.src;
+         modalImage.alt = img.alt;
+         modal.style.display = 'flex';
+       });
+     });
+ 
+     function closeModal() {
+       modal.style.display = 'none';
+     }
+ 
+     modal.addEventListener('click', (e) => {
+       if (e.target === modal) closeModal();
+     });
+ 
+     // Quotes Functionality
+     const quotes = [
+       "Wo tsi yɛ cocoa dua – Your brain is a cocoa tree that grows as long as you feed it with what it needs.",
+       "The past is a canvas; paint it with lessons for the future.",
+       "Art is the heartbeat of a culture, pulsing through time.",
+       "Wisdom is the root, knowledge the branches – nurture both.",
+       "A people without history are like a tree without roots.",
+       "Every stroke of the artist’s hand tells a story of the soul.",
+       "To understand art is to listen to the whispers of ancestors.",
+       "Growth comes to those who plant seeds in fertile minds.",
+       "The beauty of Africa lies in its unyielding spirit.",
+       "Education is the key that unlocks the treasure of heritage.",
+       "A mind open to learning is a sky open to stars.",
+       "Tradition is not a chain, but a bridge to tomorrow.",
+       "Art speaks where words fail.",
+       "The wise man builds his house on the rock of culture.",
+       "To create is to breathe life into the invisible.",
+       "A nation’s wealth is measured in its stories, not its gold.",
+       "The artist sees what the eyes of others overlook.",
+       "Knowledge shared is a flame multiplied.",
+       "In every carving lies a lesson, in every color a truth.",
+       "The future belongs to those who honor the past."
+     ];
+     const quoteDisplay = document.getElementById('quoteDisplay');
+     const quoteBtn = document.getElementById('quoteBtn');
+     let intervalId = null;
+ 
+     function shuffleQuotes() {
+       const randomIndex = Math.floor(Math.random() * quotes.length);
+       quoteDisplay.textContent = quotes[randomIndex];
+     }
+ 
+     quoteBtn.addEventListener('click', () => {
+       if (intervalId) {
+         clearInterval(intervalId);
+         intervalId = null;
+         quoteBtn.textContent = 'Begin Wise Sayings';
+         quoteDisplay.textContent = "Click 'Begin Wise Sayings' to start.";
+       } else {
+         shuffleQuotes();
+         intervalId = setInterval(shuffleQuotes, 10000);
+         quoteBtn.textContent = 'Stop Wise Sayings';
+       }
+     });
+   </script>
+ </body>
+ </html>
